@@ -7,7 +7,11 @@ import { getSlideStatusColor, getSlideStatusLabel } from '@/shared/lib/slide-sta
 
 import classes from './SlidesCarousel.module.css'
 
-export const SlidesCarousel = () => {
+type SlidesCarouselProps = {
+    onActiveSlideChange?: (slideId: string | null) => void
+}
+
+export const SlidesCarousel = ({ onActiveSlideChange }: SlidesCarouselProps) => {
     const slides = useSlidesStore((state) => state.slides)
     const toggleSlideChecked = useSlidesStore((state) => state.toggleSlideChecked)
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
@@ -34,16 +38,26 @@ export const SlidesCarousel = () => {
             return
         }
 
-        setSelectedIndex(emblaApi.selectedScrollSnap())
-    }, [emblaApi])
+        const index = emblaApi.selectedScrollSnap()
+        setSelectedIndex(index)
+        onActiveSlideChange?.(slides[index]?.id ?? null)
+    }, [emblaApi, onActiveSlideChange, slides])
 
     useEffect(() => {
         if (!emblaApi) {
             return
         }
 
+        emblaApi.reInit()
         setScrollSnaps(emblaApi.scrollSnapList())
         onSelect()
+    }, [emblaApi, slides, onSelect])
+
+    useEffect(() => {
+        if (!emblaApi) {
+            return
+        }
+
         emblaApi.on('select', onSelect)
         emblaApi.on('reInit', onSelect)
 
@@ -56,7 +70,7 @@ export const SlidesCarousel = () => {
     if (slides.length === 0) {
         return (
             <Paper withBorder p="xl" radius="md">
-                <Text c="dimmed">Активы не найдены</Text>
+                <Text c="dimmed">Активы не найдены. Добавьте первый актив в парк.</Text>
             </Paper>
         )
     }

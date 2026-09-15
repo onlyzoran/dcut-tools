@@ -3,45 +3,44 @@ import { useState } from 'react'
 
 import { AddSlideModal } from '@/features/slide/add'
 import { DeleteSlideModal } from '@/features/slide/delete'
-import { useSlidesStore } from '@/entities/slide'
 import { Header } from '@/widgets/header'
 import { SlidesCarousel } from '@/widgets/slides-carousel'
 
 export const HomePage = () => {
-    const slides = useSlidesStore((state) => state.slides)
     const [addOpened, setAddOpened] = useState(false)
     const [deleteOpened, setDeleteOpened] = useState(false)
-    const [selectedSlideId, setSelectedSlideId] = useState<string | null>(null)
-
-    const currentSlideId = slides[0]?.id ?? null
+    const [activeSlideId, setActiveSlideId] = useState<string | null>(null)
 
     const openDeleteModal = () => {
-        setSelectedSlideId(currentSlideId)
+        if (!activeSlideId) {
+            return
+        }
+
         setDeleteOpened(true)
     }
 
     return (
-        <Stack gap={0}>
+        <Stack gap={0} mih="100vh">
             <Header />
             <Container py="xl" size="md">
                 <Stack gap="lg">
-                    <Group justify="space-between">
-                        <Title order={2}>Каталог инструментов</Title>
+                    <Group justify="space-between" align="flex-end" wrap="wrap">
+                        <Title order={2}>Парк активов</Title>
                         <Group>
-                            <Button onClick={() => setAddOpened(true)}>Добавить</Button>
-                            <Button variant="light" color="red" onClick={openDeleteModal} disabled={!currentSlideId}>
-                                Удалить
+                            <Button onClick={() => setAddOpened(true)}>Добавить актив</Button>
+                            <Button variant="light" color="red" onClick={openDeleteModal} disabled={!activeSlideId}>
+                                Удалить актив
                             </Button>
                         </Group>
                     </Group>
-                    <SlidesCarousel />
+                    <SlidesCarousel onActiveSlideChange={setActiveSlideId} />
                 </Stack>
             </Container>
 
             <AddSlideModal opened={addOpened} onClose={() => setAddOpened(false)} />
             <DeleteSlideModal
                 opened={deleteOpened}
-                slideId={selectedSlideId}
+                slideId={activeSlideId}
                 onClose={() => setDeleteOpened(false)}
             />
         </Stack>

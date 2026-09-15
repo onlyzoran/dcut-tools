@@ -6,8 +6,6 @@ import { getStorageJson, setStorageJson } from '@/shared/lib/local-storage'
 import { initialSlides } from './initial-data'
 import type { Slide } from './types'
 
-const PERSIST_KEY = 'slide_data'
-
 type SlidesStore = {
     slides: Slide[]
     addSlide: (slide: Omit<Slide, 'id'>) => void
@@ -43,6 +41,10 @@ const loadSlides = (): Slide[] => {
     return stored
 }
 
+const persistSlides = (slides: Slide[]): void => {
+    setStorageJson(SLIDES_STORAGE_KEY, slides)
+}
+
 export const useSlidesStore = create<SlidesStore>((set, get) => ({
     slides: loadSlides(),
 
@@ -60,7 +62,7 @@ export const useSlidesStore = create<SlidesStore>((set, get) => ({
                 },
             ],
         }))
-        setStorageJson(PERSIST_KEY, get().slides)
+        persistSlides(get().slides)
     },
 
     updateSlide: (id, slide) => {
@@ -74,7 +76,7 @@ export const useSlidesStore = create<SlidesStore>((set, get) => ({
         set((state) => ({
             slides: state.slides.filter((slide) => slide.id !== id),
         }))
-        setStorageJson(PERSIST_KEY, get().slides)
+        persistSlides(get().slides)
     },
 
     toggleSlideChecked: (id) => {
@@ -83,6 +85,6 @@ export const useSlidesStore = create<SlidesStore>((set, get) => ({
                 slide.id === id ? { ...slide, isChecked: !slide.isChecked } : slide,
             ),
         }))
-        setStorageJson(PERSIST_KEY, get().slides)
+        persistSlides(get().slides)
     },
 }))
