@@ -1,0 +1,36 @@
+.viewport {
+    overflow: hidden;
+    border-radius: var(--mantine-radius-md);
+}
+
+.container {
+    display: flex;
+}
+
+.slide {
+    flex: 0 0 100%;
+    min-width: 0;
+    padding: 0 4px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--mantine-color-gray-4);
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.2s ease;
+}
+
+.dotActive {
+    background-color: var(--mantine-color-dcut-6);
+    transform: scale(1.15);
+}
+
+@media (max-width: 768px) {
+    .slide {
+        padding: 0;
+    }
+}

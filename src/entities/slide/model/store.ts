@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
-import { initialSlides } from './initial-data'
-import type { Slide } from './types'
+import { initialSlides } from './initial-data.ts'
+import type { Slide } from './types.ts'
 
 type SlidesStore = {
     slides: Slide[]
