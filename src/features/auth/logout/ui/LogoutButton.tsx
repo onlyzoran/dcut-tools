@@ -1,3 +1,20 @@
+import { Button } from '@mantine/core'
+import { useNavigate } from 'react-router-dom'
+
+import { useSessionStore } from '@/entities/session'
+
 export const LogoutButton = () => {
-    return <button type="button">Logout</button>
+    const navigate = useNavigate()
+    const logout = useSessionStore((state) => state.logout)
+
+    const handleLogout = () => {
+        logout()
+        navigate('/login')
+    }
+
+    return (
+        <Button variant="light" color="gray" size="compact-md" onClick={handleLogout}>
+            Выйти
+        </Button>
+    )
 }
