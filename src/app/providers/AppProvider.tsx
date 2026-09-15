@@ -5,18 +5,27 @@ import { dcutColors } from '@/shared/config/theme'
 
 import '@mantine/core/styles.css'
 
+import { SessionProvider } from './SessionProvider'
+
 const theme = createTheme({
     primaryColor: 'dcut',
-    colors: { dcut: dcutColors },
+    colors: {
+        dcut: dcutColors,
+    },
     fontFamily: 'Inter, system-ui, sans-serif',
+    headings: {
+        fontFamily: 'Inter, system-ui, sans-serif',
+    },
 })
 
-type AppProviderProps = { children: ReactNode }
+type AppProviderProps = {
+    children: ReactNode
+}
 
 export const AppProvider = ({ children }: AppProviderProps) => {
     return (
         <MantineProvider theme={theme} defaultColorScheme="light">
-            {children}
+            <SessionProvider>{children}</SessionProvider>
         </MantineProvider>
     )
 }

@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
 import { AUTH_TOKEN_KEY } from '@/shared/config/constants'
-import { removeStorageItem, setStorageItem } from '@/shared/lib/local-storage'
+import { getStorageItem, removeStorageItem, setStorageItem } from '@/shared/lib/local-storage'
 
 type SessionStore = {
     token: string | null
@@ -11,7 +11,7 @@ type SessionStore = {
 }
 
 export const useSessionStore = create<SessionStore>((set) => ({
-    token: null,
+    token: getStorageItem(AUTH_TOKEN_KEY),
 
     login: (token) => {
         setStorageItem(AUTH_TOKEN_KEY, token)
@@ -24,7 +24,6 @@ export const useSessionStore = create<SessionStore>((set) => ({
     },
 
     initFromStorage: () => {
-        const stored = localStorage.getItem(AUTH_TOKEN_KEY)
-        set({ token: stored })
+        set({ token: getStorageItem(AUTH_TOKEN_KEY) })
     },
 }))
