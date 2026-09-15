@@ -25,6 +25,9 @@ export const AddSlideModal = ({ opened, onClose }: AddSlideModalProps) => {
             annotation: '',
             isChecked: false,
         },
+        validate: {
+            title: (value) => (value.trim().length === 0 ? 'Название обязательно' : null),
+        },
     })
 
     const handleClose = () => {
@@ -48,7 +51,7 @@ export const AddSlideModal = ({ opened, onClose }: AddSlideModalProps) => {
             <form onSubmit={handleSubmit}>
                 <Stack gap="md">
                     <TextInput label="Артикул" placeholder="DBRJ1530" {...form.getInputProps('sku')} />
-                    <TextInput label="Название" placeholder="Название актива" {...form.getInputProps('title')} />
+                    <TextInput label="Название" placeholder="Название актива" required {...form.getInputProps('title')} />
                     <Textarea
                         label="Описание"
                         placeholder="Объект, статус, примечания"
