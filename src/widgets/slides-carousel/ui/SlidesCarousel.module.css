@@ -1,36 +1,100 @@
+.root {
+    --slide-size: 100%;
+    --slide-spacing: 0px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    align-self: stretch;
+}
+
+.rootSingle {
+    --slide-size: 100%;
+    --slide-spacing: 0px;
+}
+
 .viewport {
     overflow: hidden;
-    border-radius: var(--mantine-radius-md);
+    width: 100%;
 }
 
 .container {
     display: flex;
+    align-items: stretch;
+    touch-action: pan-y pinch-zoom;
+    margin-left: calc(var(--slide-spacing) * -1);
 }
 
 .slide {
-    flex: 0 0 100%;
+    flex: 0 0 var(--slide-size);
     min-width: 0;
-    padding: 0 4px;
+    padding-left: var(--slide-spacing);
+    box-sizing: border-box;
+    display: flex;
+}
+
+.slideCard {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.slideBody {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.slideActions {
+    margin-top: auto;
+    padding-top: var(--mantine-spacing-sm);
+}
+
+.controls {
+    min-height: 36px;
+    width: 100%;
+}
+
+.dots {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 36px;
+    flex: 1;
+    min-width: 0;
 }
 
 .dot {
-    width: 10px;
-    height: 10px;
+    display: block;
+    width: 12px;
+    height: 12px;
     border: none;
     border-radius: 50%;
-    background-color: var(--mantine-color-gray-4);
+    background-color: var(--mantine-color-dimmed);
+    opacity: 0.45;
     cursor: pointer;
     padding: 0;
-    transition: background-color 0.2s ease;
+    margin: 0;
+    line-height: 0;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
 }
 
 .dotActive {
     background-color: var(--mantine-color-dcut-6);
+    opacity: 1;
     transform: scale(1.15);
 }
 
-@media (max-width: 768px) {
-    .slide {
-        padding: 0;
+@media (min-width: 48em) {
+    .root:not(.rootSingle) {
+        --slide-size: 50%;
+        --slide-spacing: 12px;
     }
 }

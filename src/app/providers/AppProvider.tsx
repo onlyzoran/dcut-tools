@@ -16,6 +16,15 @@ const theme = createTheme({
     headings: {
         fontFamily: 'Inter, system-ui, sans-serif',
     },
+    components: {
+        Switch: {
+            styles: {
+                root: { cursor: 'pointer' },
+                track: { cursor: 'pointer' },
+                label: { cursor: 'pointer' },
+            },
+        },
+    },
 })
 
 type AppProviderProps = {
