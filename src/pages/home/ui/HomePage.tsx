@@ -1,3 +1,9 @@
+import { Container, Title } from '@mantine/core'
+
 export const HomePage = () => {
-    return <div>Home</div>
+    return (
+        <Container py="xl">
+            <Title order={1}>Главная</Title>
+        </Container>
+    )
 }
