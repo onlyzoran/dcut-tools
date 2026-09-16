@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 
 export default defineConfig(({ mode }) => ({
     plugins: [react()],
-    base: mode === 'production' ? '/DCUT-test-1/' : '/',
+    base: mode === 'production' ? '/dcut-tools/' : '/',
     resolve: {
         alias: {
             '@': path.resolve(import.meta.dirname, './src'),

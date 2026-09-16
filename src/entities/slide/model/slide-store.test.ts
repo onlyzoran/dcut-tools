@@ -88,4 +88,11 @@ describe('useSlidesStore', () => {
         expect(useSlidesStore.getState().slides.length).toBeGreaterThan(0)
         expect(useSlidesStore.getState().slides[0]?.sku).toBeTruthy()
     })
+
+    it('keeps empty slides list after reload', () => {
+        localStorage.setItem(SLIDES_STORAGE_KEY, '[]')
+        useSlidesStore.getState().initFromStorage()
+
+        expect(useSlidesStore.getState().slides).toEqual([])
+    })
 })

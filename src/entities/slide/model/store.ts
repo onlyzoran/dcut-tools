@@ -34,7 +34,7 @@ const isSlide = (value: unknown): value is Slide => {
 const loadSlides = (): Slide[] => {
     const stored = getStorageJson<unknown>(SLIDES_STORAGE_KEY)
 
-    if (!Array.isArray(stored) || stored.length === 0 || !stored.every(isSlide)) {
+    if (!Array.isArray(stored) || !stored.every(isSlide)) {
         return initialSlides
     }
 
