@@ -1,34 +1,48 @@
 # DCUT Tools
 
-# React + TypeScript + Vite
+SPA с имитацией аутентификации и каруселью активов. Контент и терминология inspired by системой управления парком инструментов компании [DCUT](https://dcut.ru/).
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Построено по **Feature-Sliced Design**.
 
-Currently, two official plugins are available:
+## Стек
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19 + TypeScript (strict)
+- Vite, Mantine, Embla Carousel
+- Zustand, React Router
+- Vitest + Testing Library
 
-## React Compiler
+## Быстрый старт
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+**Demo-вход:** любой корректный email (например `user@dcut.ru`) + пароль от 3 символов.
+
+## Скрипты
+
+```bash
+npm run dev       # локальная разработка
+npm run build     # production-сборка
+npm run preview   # preview сборки
+npm test          # unit-тесты
+```
+
+## GitHub Pages
+
+https://onlyzoran.github.io/dcut-tools/
+
+## Функциональность
+
+- `/login` - вход (email + пароль ≥ 3 символов)
+- `/` - KPI-метрики и карусель активов DCUT
+- CRUD слайдов: добавление, редактирование, удаление (модалки)
+- Toggle статуса «На объекте» / «На складе»
+- Светлая / тёмная тема (переключатель в шапке и на login)
+- Карусель: 1 слайд на мобиле, 2 на десктопе
+- Persist auth token и slides в `localStorage`
+
+## Архитектура
+
+Подробнее - [ARCHITECTURE.md](./ARCHITECTURE.md).

@@ -6,9 +6,11 @@ import { LoginPage } from '@/pages/login'
 import { GuestRoute } from './GuestRoute'
 import { ProtectedRoute } from './ProtectedRoute'
 
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/'
+
 export const AppRouter = () => {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={basename}>
             <Routes>
                 <Route
                     path="/login"
