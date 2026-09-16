@@ -9,7 +9,7 @@ SPA с имитацией аутентификации и каруселью а�
 - React 19 + TypeScript (strict)
 - Vite, Mantine, Embla Carousel
 - Zustand, React Router
-- Vitest + Testing Library
+- Vitest
 
 ## Быстрый старт
 

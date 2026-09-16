@@ -1,5 +1,3 @@
-import '@testing-library/jest-dom/vitest'
-
 const localStorageMock = (() => {
     let store: Record<string, string> = {}
 
