@@ -46,3 +46,7 @@ https://onlyzoran.github.io/dcut-tools/
 ## Архитектура
 
 Подробнее - [ARCHITECTURE.md](./ARCHITECTURE.md).
+
+## Теория
+
+Ответы на вопросы TypeScript с примерами из проекта - [THEORY.md](./THEORY.md).
